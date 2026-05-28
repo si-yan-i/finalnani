@@ -139,7 +139,6 @@ public class SignUpUI extends JFrame {
         String password = new String(passwordField.getPassword());
         String confirm  = new String(confirmField.getPassword());
 
-        // Validation
         if (username.isEmpty() || password.isEmpty() || confirm.isEmpty()) {
             showError("Please fill in all fields.", ACCENT_RED);
             return;

@@ -3,130 +3,160 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
-
 public class LogoutUI extends JFrame {
 
 
-    private final Color BG_PRIMARY;
-    private final Color BG_CARD;
-    private final Color BORDER_COLOR;
-    private final Color TEXT_PRIMARY;
-    private final Color TEXT_MUTED;
-    private static final Color ACCENT_BLUE  = new Color(24, 95, 165);
-    private static final Color ACCENT_RED   = new Color(163, 45, 45);
-    private final Color BG_SECONDARY;
+    private static final Color DARK_BG      = new Color(7, 18, 48);
+    private static final Color CARD_BG      = new Color(245, 247, 250);
+    private static final Color TEXT_PRIMARY = new Color(15, 23, 42);
+    private static final Color TEXT_MUTED   = new Color(100, 116, 139);
 
+    private static final Color ACCENT_BLUE  = new Color(59, 130, 246);
+    private static final Color ACCENT_RED   = new Color(239, 68, 68);
 
     public LogoutUI(String username) {
+
         super("CentSible — Logged Out");
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setMinimumSize(new Dimension(360, 300));
-        BG_PRIMARY = uiColor("Panel.background", "control", new Color(250, 250, 249));
-        BG_SECONDARY = uiColor("TextField.background", "controlHighlight", new Color(243, 242, 240));
-        BG_CARD = uiColor("Panel.background", "control", Color.WHITE);
-        BORDER_COLOR = uiColor("Component.borderColor", "Separator.foreground", new Color(220, 218, 213));
-        TEXT_PRIMARY = uiColor("Label.foreground", "TextField.foreground", new Color(28, 28, 26));
-        TEXT_MUTED = uiColor("textInactiveText", "Label.disabledForeground", new Color(120, 118, 112));
-        setBackground(BG_PRIMARY);
+        setSize(500, 420);
+        setMinimumSize(new Dimension(500, 420));
+        setLocationRelativeTo(null);
+        setResizable(false);
+
 
         JPanel root = new JPanel(new GridBagLayout());
-        root.setBackground(BG_PRIMARY);
-        root.setBorder(new EmptyBorder(30, 30, 30, 30));
+        root.setBackground(DARK_BG);
+        root.setBorder(new EmptyBorder(25, 25, 25, 25));
         add(root);
 
         GridBagConstraints gbc = new GridBagConstraints();
-        gbc.fill    = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1.0;
-        gbc.gridx   = 0;
+        gbc.gridx = 0;
+        gbc.weightx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
 
         JLabel logo = new JLabel("💰 CentSible", SwingConstants.CENTER);
-        logo.setFont(new Font("SansSerif", Font.BOLD, 26));
-        logo.setForeground(TEXT_PRIMARY);
-        gbc.gridy  = 0;
-        gbc.insets = new Insets(0, 0, 24, 0);
+        logo.setFont(new Font("SansSerif", Font.BOLD, 40));
+        logo.setForeground(Color.WHITE);
+
+        gbc.gridy = 0;
+        gbc.insets = new Insets(0, 0, 20, 0);
         root.add(logo, gbc);
 
 
         JPanel card = new JPanel();
         card.setLayout(new BoxLayout(card, BoxLayout.Y_AXIS));
-        card.setBackground(BG_CARD);
+        card.setBackground(CARD_BG);
         card.setBorder(BorderFactory.createCompoundBorder(
-                new LineBorder(BORDER_COLOR, 1, true),
-                new EmptyBorder(24, 24, 24, 24)));
-        gbc.gridy  = 1;
+                BorderFactory.createLineBorder(new Color(220, 220, 220)),
+                new EmptyBorder(40, 40, 40, 40)
+        ));
+
+        gbc.gridy = 1;
         gbc.insets = new Insets(0, 0, 0, 0);
         root.add(card, gbc);
 
-
         JLabel icon = new JLabel("👋", SwingConstants.CENTER);
-        icon.setFont(new Font("SansSerif", Font.PLAIN, 36));
-        icon.setAlignmentX(CENTER_ALIGNMENT);
+        icon.setFont(new Font("SansSerif", Font.PLAIN, 42));
+        icon.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         card.add(icon);
-        card.add(Box.createVerticalStrut(10));
+        card.add(Box.createVerticalStrut(15));
 
-        String name = (username != null && !username.isBlank()) ? username : "User";
-        JLabel heading = new JLabel("Goodbye, " + name + "!", SwingConstants.CENTER);
-        heading.setFont(new Font("SansSerif", Font.BOLD, 18));
+        String name = (username != null && !username.isBlank())
+                ? username
+                : "User";
+
+        JLabel heading = new JLabel(
+                "Goodbye, " + name + "!",
+                SwingConstants.CENTER
+        );
+
+        heading.setFont(new Font("SansSerif", Font.BOLD, 24));
         heading.setForeground(TEXT_PRIMARY);
-        heading.setAlignmentX(CENTER_ALIGNMENT);
+        heading.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         card.add(heading);
-        card.add(Box.createVerticalStrut(6));
+        card.add(Box.createVerticalStrut(8));
 
-        JLabel sub = new JLabel("You have been successfully logged out.", SwingConstants.CENTER);
-        sub.setFont(new Font("SansSerif", Font.PLAIN, 12));
+        JLabel sub = new JLabel(
+                "You have been successfully logged out.",
+                SwingConstants.CENTER
+        );
+
+        sub.setFont(new Font("SansSerif", Font.PLAIN, 13));
         sub.setForeground(TEXT_MUTED);
-        sub.setAlignmentX(CENTER_ALIGNMENT);
+        sub.setAlignmentX(Component.CENTER_ALIGNMENT);
+
         card.add(sub);
-        card.add(Box.createVerticalStrut(22));
+        card.add(Box.createVerticalStrut(28));
 
+        JPanel btnRow = new JPanel(new FlowLayout(
+                FlowLayout.CENTER,
+                12,
+                0
+        ));
 
-        JPanel btnRow = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
         btnRow.setOpaque(false);
-        btnRow.setAlignmentX(CENTER_ALIGNMENT);
 
-        JButton loginAgainBtn = styledButton("Log back in", ACCENT_BLUE, Color.BLACK);
+        JButton loginAgainBtn = styledButton(
+                "Log back in",
+                ACCENT_BLUE
+        );
+
         loginAgainBtn.addActionListener(e -> {
             dispose();
-            SwingUtilities.invokeLater(() -> new LoginUI().setVisible(true));
+
+            SwingUtilities.invokeLater(() ->
+                    new LoginUI().setVisible(true)
+            );
         });
 
-        JButton exitBtn = styledButton("Exit", BG_SECONDARY, TEXT_PRIMARY);
+        JButton exitBtn = styledButton(
+                "Exit",
+                ACCENT_RED
+        );
+
         exitBtn.addActionListener(e -> System.exit(0));
 
         btnRow.add(loginAgainBtn);
         btnRow.add(exitBtn);
-        card.add(btnRow);
 
-        pack();
-        setLocationRelativeTo(null);
-        setResizable(true);
+        card.add(btnRow);
     }
 
 
-    private JButton styledButton(String text, Color bg, Color fg) {
+    private JButton styledButton(String text, Color bg) {
+
         JButton btn = new JButton(text);
-        btn.setFont(new Font("SansSerif", Font.BOLD, 12));
+
+        btn.setFont(new Font("SansSerif", Font.BOLD, 13));
+        btn.setForeground(Color.BLACK);
         btn.setBackground(bg);
-        btn.setForeground(fg);
-        btn.setBorder(BorderFactory.createCompoundBorder(
-                new LineBorder(bg.darker(), 1, true),
-                new EmptyBorder(8, 18, 8, 18)));
+
         btn.setFocusPainted(false);
-        btn.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btn.setCursor(
+                Cursor.getPredefinedCursor(Cursor.HAND_CURSOR)
+        );
+
+        btn.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(bg.darker()),
+                new EmptyBorder(12, 28, 12, 28)
+        ));
+
         btn.addMouseListener(new MouseAdapter() {
-            public void mouseEntered(MouseEvent e) { btn.setBackground(bg.darker()); }
-            public void mouseExited(MouseEvent e)  { btn.setBackground(bg); }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                btn.setBackground(bg.darker());
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                btn.setBackground(bg);
+            }
         });
         return btn;
-    }
-
-    private static Color uiColor(String key1, String key2, Color fallback) {
-        Color color = UIManager.getColor(key1);
-        if (color != null) {
-            return color;
-        }
-        color = UIManager.getColor(key2);
-        return color != null ? color : fallback;
     }
 }

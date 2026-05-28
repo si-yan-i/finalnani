@@ -1,0 +1,8 @@
+#vscode stuff
+.vscode/
+
+#jdk
+oracleJdk-26/
+
+#compiled code
+out/

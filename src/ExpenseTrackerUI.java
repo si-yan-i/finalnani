@@ -10,14 +10,14 @@ import javax.swing.table.*;
 
 public class ExpenseTrackerUI extends JFrame {
 
-    // ── Sidebar dark theme ────────────────────────────────────────────────
+
     static final Color SIDEBAR_BG     = new Color(15,  23,  42);
     static final Color SIDEBAR_HOVER  = new Color(51,  65,  85);
     static final Color SIDEBAR_ACTIVE = new Color(47, 106, 229);
 
     static final Color PAGE_BG = new Color(236, 240, 249);
 
-    // ── Metric card accent backgrounds (tinted) ───────────────────────────
+    // Metric card
     static final Color CARD_TOTAL_BG  = new Color(235, 244, 255);
     static final Color CARD_TOTAL_FG  = new Color( 24,  90, 190);
     static final Color CARD_BUDGET_BG = new Color(232, 248, 240);
@@ -27,7 +27,7 @@ public class ExpenseTrackerUI extends JFrame {
     static final Color CARD_COUNT_BG  = new Color(243, 235, 255);
     static final Color CARD_COUNT_FG  = new Color( 90,  40, 180);
 
-    // ── Left-panel card backgrounds ───────────────────────────────────────
+    //  Left-panel card
     static final Color ADD_CARD_BG     = new Color(255, 255, 255);
     static final Color ADD_CARD_B      = new Color(12, 42, 76);
     static final Color ADD_CARD_BORDER = new Color(198, 218, 255);
@@ -42,7 +42,7 @@ public class ExpenseTrackerUI extends JFrame {
     static final Color WEEKLY_CARD_BORDER = new Color(200, 180, 240);
     static final Color WEEKLY_HEADER_BAR  = new Color(90, 40, 180);
 
-    // ── Right-panel card backgrounds ─────────────────────────────────────
+    //  Right-panel card
     static final Color DONUT_CARD_BG    = new Color(255, 195, 243);
     static final Color DONUT_CARD_BORDER = new Color(230, 180, 218);
     static final Color DONUT_HEADER_BAR  = new Color(172, 36, 120);
@@ -52,7 +52,7 @@ public class ExpenseTrackerUI extends JFrame {
     static final Color SEARCH_CARD_BORDER = new Color(180, 210, 245);
     static final Color SEARCH_HEADER_BAR  = new Color(178, 216, 255);
 
-    // ── Table panel ───────────────────────────────────────────────────────
+    // Table panel
     static final Color TABLE_PANEL_BG   = new Color(22,  33,  62);
     static final Color TABLE_HEADER_BG  = new Color(30,  41,  59);
     static final Color TABLE_HEADER_F   = new Color(206, 234, 255);
@@ -64,7 +64,7 @@ public class ExpenseTrackerUI extends JFrame {
     static final Color TABLE_BORDER     = new Color(45,  65, 110);
     static final Color TABLE_AMT_FG     = new Color(100, 220, 160);
 
-    // ── General accents ───────────────────────────────────────────────────
+    // General accents
     static final Color ACCENT_BLUE  = new Color(47, 106, 229);
     static final Color ACCENT_GREEN = new Color(22, 138,  86);
     static final Color ACCENT_RED   = new Color(220,  53,  69);
@@ -76,7 +76,7 @@ public class ExpenseTrackerUI extends JFrame {
             new Color(186, 117,  23), new Color(136, 135, 128),
     };
 
-    // ── Dynamic colors ────────────────────────────────────────────────────
+    //  Dynamic colors
     final Color BG_SECONDARY;
     final Color TEXT_PRIMARY;
     final Color TEXT_MUTED;
@@ -124,7 +124,7 @@ public class ExpenseTrackerUI extends JFrame {
         contentArea = new JPanel(cardLayout);
         contentArea.setBackground(PAGE_BG);
 
-        // Build sub-panels
+        // sub-panels
         dashboardPanel  = new DashboardPanel(this);
         expensesPanel   = new ExpensesPanel(this);
         categoriesPanel = new CategoriesPanel(this);
@@ -217,7 +217,7 @@ public class ExpenseTrackerUI extends JFrame {
         JButton budBtn     = navBtn("🎯", "Budget",           "Budget");
         JButton wkBtn      = navBtn("📅", "Weekly Breakdown", "WeeklyBreakdown");
 
-        // Mark Dashboard active initially
+
         setActiveSidebarBtn(dashBtn);
 
         sb.add(wrap(dashBtn));
@@ -335,7 +335,7 @@ public class ExpenseTrackerUI extends JFrame {
     }
 
     // ─────────────────────────────────────────────────────────────────────
-    //  SHARED REFRESH — pushes latest data to ALL sub-panels
+    //  SHARED REFRESH — pushes latest data to ALL sub-panels hihihihi
     // ─────────────────────────────────────────────────────────────────────
     void refreshAll() {
         List<Expense> all   = ExpenseTracker.getExpensesList();
@@ -621,7 +621,7 @@ class DashboardPanel extends JPanel {
         return outer;
     }
 
-    // ── Left panel: Add Expense form only ────────────────────────────────
+    // Left panel: Add Expense form lang galing
     private JPanel buildLeftPanel() {
         JPanel p = new JPanel();
         p.setLayout(new BoxLayout(p, BoxLayout.Y_AXIS));
@@ -705,16 +705,16 @@ class DashboardPanel extends JPanel {
         catCombo.setSelectedIndex(0);
     }
 
-    // ── Right panel: Donut + Search/Filter + Table ────────────────────────
+    //  Right panel: Donut + Search/Filter + Table
     private JPanel buildRightPanel() {
         JPanel p = new JPanel(new BorderLayout(0, 10));
         p.setOpaque(false);
         JPanel topRow = new JPanel(new BorderLayout(10, 0));
         topRow.setOpaque(false);
         JPanel donutCard = ui.colorCard("🍩 Manage Categories", ExpenseTrackerUI.DONUT_CARD_BG, ExpenseTrackerUI.DONUT_CARD_BORDER, ExpenseTrackerUI.DONUT_HEADER_BAR, Color.WHITE);
-        donutCard.setPreferredSize(new Dimension(220, 215));
+        donutCard.setPreferredSize(new Dimension(240, 280));
         donutChart = new DonutChartPanel(ui);
-        donutChart.setPreferredSize(new Dimension(200, 162));
+        donutChart.setPreferredSize(new Dimension(220, 230));
         donutCard.add(donutChart);
         topRow.add(donutCard, BorderLayout.WEST);
         topRow.add(buildSearchFilterPanel(), BorderLayout.CENTER);
@@ -790,8 +790,8 @@ class DashboardPanel extends JPanel {
     }
 
     private JPanel buildTablePanel() {
-        String[] cols = {"#", "Description", "Category", "Date", "Amount (₱)", "Actions"};
-        tableModel = new DefaultTableModel(cols, 0) { public boolean isCellEditable(int r, int c) { return c == 5; } };
+        String[] cols = {"#", "Description", "Category", "Date", "Amount (₱)"};
+        tableModel = new DefaultTableModel(cols, 0) { public boolean isCellEditable(int r, int c) { return false; } };
         expenseTable = new JTable(tableModel);
         expenseTable.setFont(new Font("SansSerif", Font.PLAIN, 13));
         expenseTable.setRowHeight(38);
@@ -819,10 +819,7 @@ class DashboardPanel extends JPanel {
         expenseTable.getColumnModel().getColumn(2).setPreferredWidth(110);
         expenseTable.getColumnModel().getColumn(3).setPreferredWidth(100);
         expenseTable.getColumnModel().getColumn(4).setPreferredWidth(100);
-        expenseTable.getColumnModel().getColumn(5).setMinWidth(160);
-        expenseTable.getColumnModel().getColumn(5).setMaxWidth(160);
-        expenseTable.getColumnModel().getColumn(5).setCellRenderer(new TableActionRenderer(ui));
-        expenseTable.getColumnModel().getColumn(5).setCellEditor(new TableActionEditor(ui, tableModel, this));
+
         DefaultTableCellRenderer amtR = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean foc, int row, int col) {
                 JLabel l = (JLabel) super.getTableCellRendererComponent(t, v, sel, foc, row, col);
@@ -834,20 +831,7 @@ class DashboardPanel extends JPanel {
             }
         };
         expenseTable.getColumnModel().getColumn(4).setCellRenderer(amtR);
-        expenseTable.addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
-                int col = expenseTable.columnAtPoint(e.getPoint());
-                int row = expenseTable.rowAtPoint(e.getPoint());
-                if (col != 5 || row < 0) return;
-                Rectangle r = expenseTable.getCellRect(row, col, false);
-                int localX = e.getX() - r.x;
-                Object raw = tableModel.getValueAt(row, 5);
-                int idx = (raw instanceof Integer) ? (Integer) raw : -1;
-                if (idx < 0) return;
-                if (localX < r.width / 2) editExpense(idx);
-                else deleteExpense(idx);
-            }
-        });
+
         JScrollPane scroll = new JScrollPane(expenseTable);
         scroll.setBorder(BorderFactory.createEmptyBorder());
         scroll.setBackground(ExpenseTrackerUI.TABLE_PANEL_BG);
@@ -977,15 +961,41 @@ class ExpensesPanel extends JPanel {
             }
         });
         table.getColumnModel().getColumn(0).setMaxWidth(36);
-        table.getColumnModel().getColumn(5).setMinWidth(160); table.getColumnModel().getColumn(5).setMaxWidth(160);
-        table.getColumnModel().getColumn(5).setCellRenderer(new TableActionRenderer(ui));
-        table.getColumnModel().getColumn(5).setCellEditor(new TableActionEditor(ui, tableModel, null) {
-            protected void onEdit(int idx) { loadForEdit(idx); }
-            protected void onDelete(int idx) {
-                int c = JOptionPane.showConfirmDialog(ui, "Remove this expense?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-                if (c == JOptionPane.YES_OPTION) { ExpenseTracker.removeExpense(idx); ui.refreshAll(); ui.toast.show("Removed", ExpenseTrackerUI.ACCENT_AMBER); }
-            }
-        });
+        table.getColumnModel().getColumn(5).setMinWidth(160);
+        table.getColumnModel().getColumn(5).setMaxWidth(160);
+
+        table.getColumnModel().getColumn(5).setCellRenderer(
+                new TableActionRenderer(ui)
+        );
+
+        table.getColumnModel().getColumn(5).setCellEditor(
+                new TableActionEditor(ui, tableModel, null) {
+
+                    protected void onEdit(int idx) {
+                        loadForEdit(idx);
+                    }
+
+                    protected void onDelete(int idx) {
+
+                        int c = JOptionPane.showConfirmDialog(
+                                ui,
+                                "Remove this expense?",
+                                "Confirm",
+                                JOptionPane.YES_NO_OPTION,
+                                JOptionPane.PLAIN_MESSAGE
+                        );
+
+                        if (c == JOptionPane.YES_OPTION) {
+                            ExpenseTracker.removeExpense(idx);
+                            ui.refreshAll();
+                            ui.toast.show(
+                                    "Removed",
+                                    ExpenseTrackerUI.ACCENT_AMBER
+                            );
+                        }
+                    }
+                }
+        );
         DefaultTableCellRenderer amtR = new DefaultTableCellRenderer() {
             public Component getTableCellRendererComponent(JTable t, Object v, boolean sel, boolean foc, int row, int col) {
                 JLabel l = (JLabel) super.getTableCellRendererComponent(t, v, sel, foc, row, col);
@@ -1072,17 +1082,18 @@ class CategoriesPanel extends JPanel {
         JPanel center = new JPanel(new BorderLayout(16, 0));
         center.setOpaque(false);
 
-        // Large donut chart
+        // Large (strawberry) dunkin donut chart
         JPanel donutCard = ui.colorCard("🍩 Spending by Category", ExpenseTrackerUI.DONUT_CARD_BG, ExpenseTrackerUI.DONUT_CARD_BORDER, ExpenseTrackerUI.DONUT_HEADER_BAR, Color.WHITE);
         bigDonut = new DonutChartPanel(ui);
-        bigDonut.setPreferredSize(new Dimension(300, 300));
+        bigDonut.setPreferredSize(new Dimension(300, 380));
         donutCard.add(bigDonut);
         center.add(donutCard, BorderLayout.WEST);
 
-        // Category breakdown table
-        JPanel tableCard = ui.colorCard("📊 Category Breakdown", ExpenseTrackerUI.SEARCH_CARD_BG, ExpenseTrackerUI.SEARCH_CARD_BORDER, ExpenseTrackerUI.SEARCH_HEADER_BAR, Color.WHITE);
+        // Category break it down yow
+        JPanel tableCard = ui.colorCard("📊 Category Breakdown", ExpenseTrackerUI.SEARCH_CARD_BG, ExpenseTrackerUI.SEARCH_CARD_BG, ExpenseTrackerUI.SEARCH_CARD_B, Color.WHITE);
         JPanel grid = new JPanel(new GridLayout(ExpenseCategory.values().length + 1, 3, 8, 6));
         grid.setOpaque(false);
+
         // Header row
         for (String h : new String[]{"Category", "Total Spent", "% of Total"}) {
             JLabel lh = new JLabel(h); lh.setFont(new Font("SansSerif", Font.BOLD, 12)); lh.setForeground(Color.WHITE); grid.add(lh);
@@ -1122,7 +1133,6 @@ class CategoriesPanel extends JPanel {
     }
 }
 
-
 // ═════════════════════════════════════════════════════════════════════════════
 //  BUDGET PANEL
 // ═════════════════════════════════════════════════════════════════════════════
@@ -1146,7 +1156,7 @@ class BudgetPanel extends JPanel {
         JPanel center = new JPanel(new GridLayout(1, 2, 16, 0));
         center.setOpaque(false);
 
-        // Set budget form
+
         JPanel formCard = ui.colorCard("🎯 Set Monthly Budget", ExpenseTrackerUI.BUDGET_CARD_B, ExpenseTrackerUI.BUDGET_CARD_BORDER, ExpenseTrackerUI.BUDGET_HEADER_BAR, Color.WHITE);
         budgetField = ui.inputField("e.g. 5000.00", ExpenseTrackerUI.BUDGET_CARD_BG);
         formCard.add(ui.formRow("Monthly Budget (₱)", budgetField));
@@ -1158,7 +1168,7 @@ class BudgetPanel extends JPanel {
         formCard.add(btnRow);
         center.add(formCard);
 
-        // Budget status card
+
         JPanel statusCard = ui.colorCard("📊 Budget Status", ExpenseTrackerUI.BUDGET_CARD_BG, ExpenseTrackerUI.BUDGET_CARD_BORDER, ExpenseTrackerUI.BUDGET_HEADER_BAR, Color.WHITE);
         spentLabel     = styledStat("Total Spent",  "₱0.00", ExpenseTrackerUI.ACCENT_RED);
         budgetAmtLabel = styledStat("Budget Set",   "—",     ExpenseTrackerUI.ACCENT_GREEN);
@@ -1317,7 +1327,7 @@ class WeeklyPanel extends JPanel {
 
 
 // ═════════════════════════════════════════════════════════════════════════════
-//  SHARED: DONUT CHART PANEL
+//  SHARED: YOU DONUT CHART PANEL
 // ═════════════════════════════════════════════════════════════════════════════
 class DonutChartPanel extends JPanel {
     private final ExpenseTrackerUI ui;
@@ -1328,45 +1338,76 @@ class DonutChartPanel extends JPanel {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+        ExpenseCategory[] cats = ExpenseCategory.values();
+
+        // Count only categories that have data (for legend sizinggggggg)
+        Map<ExpenseCategory, Double> totals = new LinkedHashMap<>();
+        for (ExpenseCategory cat : cats) totals.put(cat, 0.0);
+        for (Expense e : expenses) totals.merge(e.getCategory(), e.getAmount(), Double::sum);
+        long activeCats = java.util.Arrays.stream(cats).filter(c -> totals.get(c) >= 0.01).count();
+
+        int legendRowH  = 16;
+        int legendGap   = 8;
+        int legendHeight = (int)(activeCats * legendRowH + legendGap);
+
+        int ringAreaH = getHeight() - legendHeight;
+        int padding   = 20;
+        int sz = Math.min(getWidth() - padding * 2, ringAreaH - padding * 2);
+        if (sz < 10) return;  // too small to draw
+
+        int ringX = (getWidth() - sz) / 2;
+        int ringY = (ringAreaH - sz) / 2;
+
         double total = expenses.stream().mapToDouble(Expense::getAmount).sum();
+
         if (total == 0) {
             g2.setColor(new Color(230, 200, 225));
-            g2.setStroke(new BasicStroke(16, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
-            g2.drawOval(18, 18, getWidth() - 56, getHeight() - 36);
+            g2.setStroke(new BasicStroke(20, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
+            g2.drawOval(ringX + 10, ringY + 10, sz - 20, sz - 20);
             return;
         }
-        Map<ExpenseCategory, Double> totals = new LinkedHashMap<>();
-        for (ExpenseCategory cat : ExpenseCategory.values()) totals.put(cat, 0.0);
-        for (Expense e : expenses) totals.merge(e.getCategory(), e.getAmount(), Double::sum);
-        int sz = Math.min(getWidth() - 40, getHeight() - 20);
-        int x = (getWidth() - sz) / 2, y = (getHeight() - sz) / 2;
+
+
+        int strokeW = Math.max(14, sz / 8);
+        g2.setStroke(new BasicStroke(strokeW, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
         double start = -90;
-        ExpenseCategory[] cats = ExpenseCategory.values();
-        g2.setStroke(new BasicStroke(16, BasicStroke.CAP_BUTT, BasicStroke.JOIN_ROUND));
+        int pad = strokeW / 2 + 2;
         for (int i = 0; i < cats.length; i++) {
             double pct = totals.get(cats[i]) / total;
             if (pct < 0.001) continue;
             double sweep = pct * 360;
             g2.setColor(ExpenseTrackerUI.CAT_COLORS[i]);
-            g2.drawArc(x + 9, y + 9, sz - 18, sz - 18, (int) start, (int) sweep);
+            g2.drawArc(ringX + pad, ringY + pad, sz - pad * 2, sz - pad * 2, (int) start, (int) Math.ceil(sweep));
             start += sweep;
         }
+
+
+        int cx = ringX + sz / 2;
+        int cy = ringY + sz / 2;
+
         g2.setColor(ExpenseTrackerUI.DONUT_HEADER_BAR);
-        g2.setFont(new Font("SansSerif", Font.BOLD, 13));
+        g2.setFont(new Font("SansSerif", Font.BOLD, Math.max(11, sz / 10)));
         String totalStr = String.format("₱%.0f", total);
-        FontMetrics fm = g2.getFontMetrics();
-        g2.drawString(totalStr, getWidth()/2 - fm.stringWidth(totalStr)/2, getHeight()/2 + fm.getAscent()/2 - 2);
-        g2.setFont(new Font("SansSerif", Font.PLAIN, 10));
+        FontMetrics fmBold = g2.getFontMetrics();
+        g2.drawString(totalStr, cx - fmBold.stringWidth(totalStr) / 2, cy + fmBold.getAscent() / 2 - 4);
+
+        g2.setFont(new Font("SansSerif", Font.PLAIN, Math.max(9, sz / 14)));
         g2.setColor(new Color(160, 80, 130));
-        g2.drawString("total", getWidth()/2 - g2.getFontMetrics().stringWidth("total")/2, getHeight()/2 + fm.getAscent()/2 + 12);
-        int lx = 4, ly = getHeight() - 14 - (cats.length * 14);
+        FontMetrics fmSmall = g2.getFontMetrics();
+        g2.drawString("total", cx - fmSmall.stringWidth("total") / 2, cy + fmBold.getAscent() / 2 + fmSmall.getHeight() - 4);
+
+
+        int lx = 10;
+        int ly = ringAreaH + legendGap;
         for (int i = 0; i < cats.length; i++) {
             if (totals.get(cats[i]) < 0.01) continue;
             g2.setColor(ExpenseTrackerUI.CAT_COLORS[i]);
-            g2.fillRoundRect(lx, ly + i*14, 8, 8, 2, 2);
-            g2.setColor(new Color(100, 50, 80));
-            g2.setFont(new Font("SansSerif", Font.PLAIN, 10));
-            g2.drawString(cats[i].getLabel(), lx + 11, ly + i*14 + 8);
+            g2.fillRoundRect(lx, ly + 3, 10, 10, 3, 3);
+            g2.setColor(new Color(80, 40, 70));
+            g2.setFont(new Font("SansSerif", Font.PLAIN, 11));
+            g2.drawString(cats[i].getLabel(), lx + 14, ly + 12);
+            ly += legendRowH;
         }
     }
 }

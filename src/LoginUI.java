@@ -38,7 +38,6 @@ public class LoginUI extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setMinimumSize(new Dimension(460, 640));
 
-        // NAVY DASHBOARD THEME
         BG_PRIMARY   = new Color(15, 23, 42);
         BG_SECONDARY = new Color(241, 245, 249);
         BG_CARD      = new Color(255, 255, 255);
@@ -48,7 +47,7 @@ public class LoginUI extends JFrame {
 
         getContentPane().setBackground(BG_PRIMARY);
 
-        // ROOT PANEL
+        // ROOT PANELlist
         JPanel root = new JPanel(new GridBagLayout());
         root.setBackground(BG_PRIMARY);
         root.setBorder(new EmptyBorder(30, 30, 30, 30));
@@ -68,9 +67,7 @@ public class LoginUI extends JFrame {
 
         card.setPreferredSize(new Dimension(360, 500));
 
-        // ─────────────────────────────────────
-        // LOGO
-        // ─────────────────────────────────────
+
         JLabel logo = new JLabel("💰 CentSible");
         logo.setFont(new Font("SansSerif", Font.BOLD, 34));
         logo.setForeground(TEXT_PRIMARY);
@@ -86,23 +83,22 @@ public class LoginUI extends JFrame {
         card.add(tagline);
         card.add(Box.createVerticalStrut(24));
 
-        // ─────────────────────────────────────
+
         // USERNAME
-        // ─────────────────────────────────────
+
         JLabel userLabel = fieldLabel("Username");
         userLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         usernameField = styledTextField("Enter your username");
 
-        // ─────────────────────────────────────
         // PASSWORD
-        // ─────────────────────────────────────
+
         JLabel passLabel = fieldLabel("Password");
         passLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         passwordField = styledPasswordField("Enter your password");
 
-        // CENTER FORM
+
         JPanel form = new JPanel();
         form.setOpaque(false);
 
@@ -120,9 +116,7 @@ public class LoginUI extends JFrame {
 
         form.add(Box.createVerticalStrut(18));
 
-        // ─────────────────────────────────────
-        // ERROR LABEL
-        // ─────────────────────────────────────
+
         errorLabel = new JLabel(" ");
         errorLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
         errorLabel.setForeground(ACCENT_RED);
@@ -131,9 +125,7 @@ public class LoginUI extends JFrame {
         form.add(errorLabel);
         form.add(Box.createVerticalStrut(10));
 
-        // ─────────────────────────────────────
-        // LOGIN BUTTON
-        // ─────────────────────────────────────
+
         JButton loginBtn = styledButton(
                 "Login",
                 ACCENT_BLUE,
@@ -148,15 +140,13 @@ public class LoginUI extends JFrame {
 
         form.add(Box.createVerticalStrut(14));
 
-        // DIVIDER
+
         JSeparator sep = divider();
         form.add(sep);
 
+
         form.add(Box.createVerticalStrut(16));
 
-        // ─────────────────────────────────────
-        // SIGNUP ROW
-        // ─────────────────────────────────────
         JPanel signUpRow = new JPanel(
                 new FlowLayout(FlowLayout.CENTER, 4, 0)
         );
@@ -186,7 +176,7 @@ public class LoginUI extends JFrame {
         root.add(card);
         card.add(Box.createVerticalStrut(10));
 
-        // ENTER KEY LOGIN
+
         ActionListener enterAction = e -> handleLogin();
 
         usernameField.addActionListener(enterAction);
@@ -198,9 +188,9 @@ public class LoginUI extends JFrame {
         setResizable(true);
     }
 
-    // ─────────────────────────────────────────
+
     // LOGIN
-    // ─────────────────────────────────────────
+
     private void handleLogin() {
 
         String username =
@@ -234,9 +224,9 @@ public class LoginUI extends JFrame {
         }
     }
 
-    // ─────────────────────────────────────────
+
     // OPEN SIGNUP
-    // ─────────────────────────────────────────
+
     private void openSignUp() {
 
         dispose();
@@ -245,17 +235,17 @@ public class LoginUI extends JFrame {
                 new SignUpUI().setVisible(true));
     }
 
-    // ─────────────────────────────────────────
+
     // ERROR DISPLAY
-    // ─────────────────────────────────────────
+
     private void showError(String message) {
 
         errorLabel.setText(message);
     }
 
-    // ─────────────────────────────────────────
+
     // FIELD LABEL
-    // ─────────────────────────────────────────
+
     private JLabel fieldLabel(String text) {
 
         JLabel lbl = new JLabel(text);
@@ -266,9 +256,9 @@ public class LoginUI extends JFrame {
         return lbl;
     }
 
-    // ─────────────────────────────────────────
+
     // TEXT FIELD
-    // ─────────────────────────────────────────
+
     private JTextField styledTextField(String placeholder) {
 
         JTextField f = new JTextField();
@@ -294,9 +284,8 @@ public class LoginUI extends JFrame {
         return f;
     }
 
-    // ─────────────────────────────────────────
-    // PASSWORD FIELD
-    // ─────────────────────────────────────────
+
+
     private JPasswordField styledPasswordField(
             String placeholder) {
 
@@ -323,9 +312,7 @@ public class LoginUI extends JFrame {
         return f;
     }
 
-    // ─────────────────────────────────────────
-    // BUTTON
-    // ─────────────────────────────────────────
+
     private JButton styledButton(
             String text,
             Color bg,
@@ -360,12 +347,10 @@ public class LoginUI extends JFrame {
         btn.addMouseListener(new MouseAdapter() {
 
             public void mouseEntered(MouseEvent e) {
-
                 btn.setBackground(bg.darker());
             }
 
             public void mouseExited(MouseEvent e) {
-
                 btn.setBackground(bg);
             }
         });
@@ -373,9 +358,6 @@ public class LoginUI extends JFrame {
         return btn;
     }
 
-    // ─────────────────────────────────────────
-    // LINK BUTTON
-    // ─────────────────────────────────────────
     private JButton linkButton(String text) {
 
         JButton btn = new JButton(
@@ -401,40 +383,28 @@ public class LoginUI extends JFrame {
         return btn;
     }
 
-    // ─────────────────────────────────────────
-    // DIVIDER
-    // ─────────────────────────────────────────
     private JSeparator divider() {
-
         JSeparator sep = new JSeparator();
-
         sep.setForeground(BORDER_COLOR);
-
         sep.setMaximumSize(
                 new Dimension(Integer.MAX_VALUE, 1)
         );
-
         return sep;
     }
 
     public void prefillUsername(String username) {
-
         usernameField.setText(username);
-
         passwordField.requestFocus();
     }
 
 
     public static void main(String[] args) {
-
         try {
-
             UIManager.setLookAndFeel(
                     UIManager.getSystemLookAndFeelClassName()
             );
-
         } catch (Exception ignored) {}
-
+        UserStore.loadUsers();
         SwingUtilities.invokeLater(() ->
                 new LoginUI().setVisible(true)
         );
